@@ -1,10 +1,10 @@
-import { Button } from "@nextui-org/react";
+import { Button, NavbarMenuItem } from "@nextui-org/react";
 import { ChevronDown } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const DropdownNavigation = ({
+const DropdownDesktop = ({
   title,
   items,
 }: {
@@ -17,7 +17,7 @@ const DropdownNavigation = ({
   }[];
 }) => {
   return (
-    <div className="group relative cursor-pointer">
+    <NavbarMenuItem className="group relative cursor-pointer">
       <Button
         color="primary"
         size="sm"
@@ -40,6 +40,7 @@ const DropdownNavigation = ({
                       alt="Image"
                       width={25}
                       height={25}
+                      loading="lazy"
                     />
                   )}
                   <div className="flex flex-col">
@@ -57,19 +58,8 @@ const DropdownNavigation = ({
           })}
         </ul>
       )}
-    </div>
+    </NavbarMenuItem>
   );
 };
 
-export default DropdownNavigation;
-
-{
-  /* <li className="flex gap-2 items-center select-none space-y-1 rounded-md py-1 px-2 leading-none no-underline outline-none transition-colors hover:bg-primary/10 focus:bg-primary/10">
-          <Image src={images.sparkling} alt="Image" width={25} height={25} />
-          <div className="flex flex-col">
-            <span className="text-base font-medium">Features</span>
-
-            <span className="text-xs text-gray-500">ABVVADFADSFasd</span>
-          </div>
-        </li> */
-}
+export default DropdownDesktop;

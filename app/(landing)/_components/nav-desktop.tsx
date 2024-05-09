@@ -1,13 +1,13 @@
 import React from "react";
-import DropdownNavigation from "./dropdown-navigation";
+import DropdownDesktop from "./dropdown-desktop";
 import { dropdownData } from "@/constants";
 
 const NavDesktop = () => {
   return (
-    <ul className="hidden lg:flex">
+    <ul className="hidden lg:flex gap">
       {dropdownData.map((item) => {
         return (
-          <DropdownNavigation
+          <DropdownDesktop
             key={item.title}
             title={item.title}
             items={item.items}

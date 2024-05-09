@@ -1,14 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import {
   Navbar,
   NavbarContent,
   NavbarMenu,
-  NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import Logo from "./logo";
@@ -42,7 +39,6 @@ const NavigationMenu = () => {
     >
       <NavbarContent justify="start">
         <Logo />
-
         <NavDesktop />
       </NavbarContent>
 
@@ -79,13 +75,19 @@ const NavigationMenu = () => {
       </NavbarContent>
 
       <NavbarContent className="lg:hidden" justify="end">
+        <Button
+          size="sm"
+          color="primary"
+          className="hidden sm:block text-sm font-semibold"
+        >
+          Get NoteSync Free
+        </Button>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
 
-      {/* TODO: CHANGE CONTENT */}
-      <NavbarMenu>
+      <NavbarMenu className="p-2">
         <NavMobile />
       </NavbarMenu>
     </Navbar>

@@ -1,41 +1,33 @@
-import { NavbarMenuItem } from "@nextui-org/react";
-import Link from "next/link";
+import { dropdownData } from "@/constants";
 import React from "react";
+import DropdownMobile from "./dropdown-mobile";
+import { Button } from "@nextui-org/react";
 
 const NavMobile = () => {
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
-
   return (
-    <>
-      {menuItems.map((item, index) => (
-        <NavbarMenuItem key={`${item}-${index}`}>
-          <Link
-            className="w-full"
-            color={
-              index === 2
-                ? "warning"
-                : index === menuItems.length - 1
-                ? "danger"
-                : "foreground"
-            }
-            href="#"
-          >
-            {item}
-          </Link>
-        </NavbarMenuItem>
+    <ul className="flex flex-col lg:hidden ">
+      {dropdownData.map((item) => (
+        <DropdownMobile
+          key={item.title}
+          title={item.title}
+          items={item.items}
+        />
       ))}
-    </>
+
+      <div className="mt-6 flex flex-col gap-2 self-stretch">
+        <Button size="md" color="primary" className="text-sm font-semibold">
+          Get NoteSync Free
+        </Button>
+        <Button
+          size="md"
+          variant="bordered"
+          color="primary"
+          className="text-sm font-semibold"
+        >
+          Log In
+        </Button>
+      </div>
+    </ul>
   );
 };
 

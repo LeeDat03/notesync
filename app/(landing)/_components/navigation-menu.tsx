@@ -3,31 +3,21 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Button } from "@nextui-org/button";
+import { Button } from "@nextui-org/react";
 import {
   Navbar,
   NavbarContent,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-} from "@nextui-org/navbar";
+} from "@nextui-org/react";
+import Logo from "./logo";
+import NavMobile from "./nav-mobile";
+import NavDesktop from "./nav-desktop";
 
 const NavigationMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
 
   useEffect(() => {
     const updatePosition = () => {
@@ -50,17 +40,10 @@ const NavigationMenu = () => {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
-      <NavbarContent>
-        <Link href="/" className="flex items-center gap-2 mr-4">
-          <Image src="/icon.png" alt="Logo" width={40} height={40} />
-          <span className="text-2xl font-bold test text__logo">NoteSync</span>
-        </Link>
-      </NavbarContent>
+      <NavbarContent justify="start">
+        <Logo />
 
-      <NavbarContent className="lg:hidden" justify="end">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        />
+        <NavDesktop />
       </NavbarContent>
 
       <NavbarContent
@@ -95,25 +78,15 @@ const NavigationMenu = () => {
         </div>
       </NavbarContent>
 
+      <NavbarContent className="lg:hidden" justify="end">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        />
+      </NavbarContent>
+
       {/* TODO: CHANGE CONTENT */}
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2
-                  ? "warning"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              href="#"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        <NavMobile />
       </NavbarMenu>
     </Navbar>
   );

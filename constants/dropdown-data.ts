@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import images from "./images";
+import icons from "./icons";
 
 interface DropdownInterface {
   title: string;
@@ -19,31 +19,31 @@ const dropdownData: DropdownInterface[] = [
         href: "#",
         title: "AI",
         description: "Intergrated AI assistant",
-        imageSrc: images.ai,
+        imageSrc: icons.ai,
       },
       {
         href: "#",
         title: "Docs",
         description: "Simple & powerful",
-        imageSrc: images.docs,
+        imageSrc: icons.docs,
       },
       {
         href: "#",
         title: "Wiki",
         description: "Centralized your knowledge",
-        imageSrc: images.wiki,
+        imageSrc: icons.wiki,
       },
       {
         href: "#",
         title: "Projects",
         description: "Connected, flexible workflows",
-        imageSrc: images.project,
+        imageSrc: icons.project,
       },
       {
         href: "#",
         title: "Calendar",
         description: "Time and work together",
-        imageSrc: images.calendar,
+        imageSrc: icons.calendar,
       },
     ],
   },
@@ -71,19 +71,19 @@ const dropdownData: DropdownInterface[] = [
         href: "#",
         title: "Enterprise",
         description: "Advanced features for your business",
-        imageSrc: images.enterprise,
+        imageSrc: icons.enterprise,
       },
       {
         href: "#",
         title: "Small Business",
         description: "Run your team in one tool",
-        imageSrc: images.smallBusiness,
+        imageSrc: icons.smallBusiness,
       },
       {
         href: "#",
         title: "Personal",
         description: "Free for individuals",
-        imageSrc: images.personal,
+        imageSrc: icons.personal,
       },
     ],
   },

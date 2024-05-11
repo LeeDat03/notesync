@@ -1,21 +1,22 @@
-import calendar from "@/public/assets/images/calendar.png";
-import docs from "@/public/assets/images/docs.png";
-import ai from "@/public/assets/images/ai.png";
-import project from "@/public/assets/images/project.png";
-import wiki from "@/public/assets/images/wiki.png";
-import enterprise from "@/public/assets/images/enterprise.png";
-import personal from "@/public/assets/images/personal.png";
-import smallBusiness from "@/public/assets/images/small-business.png";
+import OcWork from "@/public/assets/images/oc-work-balance.svg";
+import OcOnLaptop from "@/public/assets/images/oc-on-the-laptop.svg";
+
+import EngineeringPage from "@/public/assets/images/engineering-page.png";
+import ProductPage from "@/public/assets/images/product-page.png";
+import OperationPage from "@/public/assets/images/operations-page.png";
+import HRPage from "@/public/assets/images/hr-page.png";
+import MarketingPage from "@/public/assets/images/marketing-page.png";
+import DesignPage from "@/public/assets/images/design-page.png";
 
 const images = {
-  calendar,
-  docs,
-  ai,
-  wiki,
-  project,
-  enterprise,
-  personal,
-  smallBusiness,
+  OcWork,
+  OcOnLaptop,
+  EngineeringPage,
+  DesignPage,
+  ProductPage,
+  OperationPage,
+  HRPage,
+  MarketingPage,
 };
 
 export default images;

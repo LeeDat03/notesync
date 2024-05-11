@@ -7,6 +7,8 @@ import OperationPage from "@/public/assets/images/operations-page.png";
 import HRPage from "@/public/assets/images/hr-page.png";
 import MarketingPage from "@/public/assets/images/marketing-page.png";
 import DesignPage from "@/public/assets/images/design-page.png";
+import Faces from "@/public/assets/images/faces.png";
+import Cta from "@/public/assets/images/cta.png";
 
 const images = {
   OcWork,
@@ -17,6 +19,8 @@ const images = {
   OperationPage,
   HRPage,
   MarketingPage,
+  Faces,
+  Cta,
 };
 
 export default images;

@@ -24,9 +24,9 @@ const Hero = () => {
           variant="light"
           color="secondary"
           size="lg"
-          className="font-semibold"
+          className="font-semibold flex items-center"
         >
-          Request A Demo <MoveRight />
+          Request A Demo <MoveRight className="-ml-2" />
         </Button>
       </div>
 

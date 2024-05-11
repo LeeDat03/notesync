@@ -1,16 +1,29 @@
 import React from "react";
 import Hero from "./_components/hero";
 import TeamSection from "./_components/team-section";
+import JoinSection from "./_components/join-section";
+import CtaSection from "./_components/cta-section";
+import Footer from "./_components/footer";
 
 const LandingPage = () => {
   return (
     <main className="px-5 w-full">
-      <section className="mt-16">
+      <section className="mt-20">
         <Hero />
       </section>
-      <section className="mt-24 mb-80">
+      <section className="my-32">
         <TeamSection />
       </section>
+      <section className="my-40">
+        <JoinSection />
+      </section>
+      <section className="">
+        <CtaSection />
+      </section>
+
+      <footer className="my-5">
+        <Footer />
+      </footer>
     </main>
   );
 };

@@ -18,7 +18,7 @@ const NavigationMenu = () => {
 
   useEffect(() => {
     const updatePosition = () => {
-      setScrollPosition(window.pageYOffset);
+      setScrollPosition(window.scrollY);
     };
     window.addEventListener("scroll", updatePosition);
     updatePosition();
@@ -30,7 +30,7 @@ const NavigationMenu = () => {
       position="sticky"
       maxWidth="full"
       classNames={{
-        wrapper: `p-2 md:p-4 flex items-center w-full z-10 bg-white transition-all duration-100 ${
+        wrapper: `p-2 md:p-4 flex items-center w-full z-[500] bg-white transition-all duration-100 ${
           scrollPosition > 10 && "border-b-3 border-gray-200"
         }`,
       }}

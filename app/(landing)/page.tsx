@@ -7,14 +7,14 @@ import Footer from "./_components/footer";
 
 const LandingPage = () => {
   return (
-    <main className="px-5 w-full">
-      <section className="mt-20">
+    <main className="px-2 md:px-5 w-full">
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <Hero />
       </section>
-      <section className="my-32">
+      <section className="my-20 md:my-24 lg:my-32">
         <TeamSection />
       </section>
-      <section className="my-40">
+      <section className="my-20 md:my-32 lg:my-40">
         <JoinSection />
       </section>
       <section className="">

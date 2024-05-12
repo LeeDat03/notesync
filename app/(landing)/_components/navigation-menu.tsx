@@ -31,7 +31,7 @@ const NavigationMenu = () => {
       maxWidth="full"
       classNames={{
         wrapper: `p-2 md:p-4 flex items-center w-full z-[500] bg-white transition-all duration-100 ${
-          scrollPosition > 10 && "border-b-3 border-gray-200"
+          scrollPosition > 10 && !isMenuOpen && "border-b-3 border-gray-200"
         }`,
       }}
       isMenuOpen={isMenuOpen}

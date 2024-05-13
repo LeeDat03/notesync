@@ -8,12 +8,13 @@ import {
   NavbarMenu,
   NavbarMenuToggle,
 } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
+import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
+
 import Logo from "./logo";
 import NavMobile from "./nav-mobile";
 import NavDesktop from "./nav-desktop";
-import { SignInButton, SignOutButton, UserButton } from "@clerk/clerk-react";
-import { Spinner } from "@nextui-org/react";
-import { useConvexAuth } from "convex/react";
 
 const NavigationMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,6 +22,7 @@ const NavigationMenu = () => {
 
   const { isAuthenticated, isLoading } = useConvexAuth();
 
+  // TODO: move to hooks
   useEffect(() => {
     const updatePosition = () => {
       setScrollPosition(window.scrollY);
@@ -79,30 +81,49 @@ const NavigationMenu = () => {
               </SignInButton>
             )}
 
-            <Button size="sm" color="primary" className="text-sm font-semibold">
-              {isAuthenticated ? "Enter NoteSync" : "Get NoteSync Free"}
-            </Button>
+            {!isLoading && !isAuthenticated && (
+              <SignUpButton mode="modal" signInForceRedirectUrl="/">
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="text-sm font-semibold"
+                >
+                  Get NoteSync Free
+                </Button>
+              </SignUpButton>
+            )}
 
-            {isAuthenticated && <UserButton signInUrl="/" />}
+            {isAuthenticated && (
+              <>
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="text-sm font-semibold"
+                >
+                  Enter NoteSync
+                </Button>
+                <UserButton
+                  signInUrl="/"
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: { width: "32px", height: "32px" },
+                    },
+                  }}
+                />
+              </>
+            )}
           </div>
         </div>
       </NavbarContent>
 
       <NavbarContent className="lg:hidden" justify="end">
-        <Button
-          size="sm"
-          color="primary"
-          className="hidden sm:block text-sm font-semibold"
-        >
-          Get NoteSync Free
-        </Button>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
 
       <NavbarMenu className="p-2">
-        <NavMobile />
+        <NavMobile isAuthenticated={isAuthenticated} isLoading={isLoading} />
       </NavbarMenu>
     </Navbar>
   );

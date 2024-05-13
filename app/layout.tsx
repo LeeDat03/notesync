@@ -1,3 +1,4 @@
+import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { fontSans } from "@/config/fonts";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
@@ -22,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontSans.className}>{children}</body>
+      <body className={fontSans.className}>
+        <ConvexClientProvider>{children}</ConvexClientProvider>
+      </body>
     </html>
   );
 }

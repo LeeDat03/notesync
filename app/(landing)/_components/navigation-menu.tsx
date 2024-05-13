@@ -11,10 +11,15 @@ import {
 import Logo from "./logo";
 import NavMobile from "./nav-mobile";
 import NavDesktop from "./nav-desktop";
+import { SignInButton, SignOutButton, UserButton } from "@clerk/clerk-react";
+import { Spinner } from "@nextui-org/react";
+import { useConvexAuth } from "convex/react";
 
 const NavigationMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  const { isAuthenticated, isLoading } = useConvexAuth();
 
   useEffect(() => {
     const updatePosition = () => {
@@ -59,17 +64,26 @@ const NavigationMenu = () => {
           <div className="self-center h-6 w-[1px] bg-gray-200"></div>
 
           <div className="flex gap-2">
-            <Button
-              size="sm"
-              variant="light"
-              color="primary"
-              className="text-sm font-semibold"
-            >
-              Log In
-            </Button>
+            {isLoading && <Spinner size="sm" />}
+
+            {!isLoading && !isAuthenticated && (
+              <SignInButton mode="modal">
+                <Button
+                  size="sm"
+                  variant="light"
+                  color="primary"
+                  className="text-sm font-semibold"
+                >
+                  Log In
+                </Button>
+              </SignInButton>
+            )}
+
             <Button size="sm" color="primary" className="text-sm font-semibold">
-              Get NoteSync Free
+              {isAuthenticated ? "Enter NoteSync" : "Get NoteSync Free"}
             </Button>
+
+            {isAuthenticated && <UserButton signInUrl="/" />}
           </div>
         </div>
       </NavbarContent>

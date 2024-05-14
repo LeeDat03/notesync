@@ -9,6 +9,7 @@ import React, { useState } from "react";
 const DropdownMobile = ({
   title,
   items,
+  onClick,
 }: {
   title: string;
   items: {
@@ -17,6 +18,7 @@ const DropdownMobile = ({
     description?: string;
     imageSrc?: StaticImageData;
   }[];
+  onClick?: () => void;
 }) => {
   const [isOpened, setIsOpened] = useState(false);
 
@@ -34,7 +36,7 @@ const DropdownMobile = ({
       {items.length > 0 && isOpened && (
         <ul className="flex flex-col mt-2 gap-1">
           {items.map((item) => (
-            <Link href={item.href} key={item.title}>
+            <Link href={item.href} key={item.title} onClick={onClick}>
               <li className="text-base flex gap-4 items-center">
                 {item.imageSrc && (
                   <Image

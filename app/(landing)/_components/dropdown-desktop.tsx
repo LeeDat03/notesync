@@ -1,8 +1,7 @@
-import { Button, NavbarMenuItem } from "@nextui-org/react";
-import { ChevronDown } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import React from "react";
+import { Button, NavbarMenuItem } from "@nextui-org/react";
+import { ChevronDown } from "lucide-react";
 
 const DropdownDesktop = ({
   title,

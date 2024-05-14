@@ -1,8 +1,12 @@
-import { images } from "@/constants";
-import { Button } from "@nextui-org/react";
-import { MoveRight } from "lucide-react";
+"use client";
+
+import { Button, Spinner } from "@nextui-org/react";
 import Image from "next/image";
-import React from "react";
+
+import { MoveRight } from "lucide-react";
+import { images } from "@/constants";
+import { AuthLoading, Authenticated, Unauthenticated } from "convex/react";
+import { SignInButton } from "@clerk/clerk-react";
 
 const CtaSection = () => {
   return (
@@ -16,22 +20,39 @@ const CtaSection = () => {
         </span>
       </div>
 
-      <div className="my-4 md:my-6 flex gap-2 md:gap-4 items-center justify-center">
-        <Button
-          color="secondary"
-          size="lg"
-          className="font-semibold shadow-sm px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
-        >
-          Try NoteSync Free
-        </Button>
-        <Button
-          variant="light"
-          color="secondary"
-          size="lg"
-          className="flex items-center font-semibold px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
-        >
-          Get NoteSync Pro <MoveRight className="-ml-2" />
-        </Button>
+      <div className="mt-8 mb-6 flex gap-2 lg:gap-4 items-center justify-center">
+        <AuthLoading>
+          <Spinner size="md" />
+        </AuthLoading>
+
+        <Unauthenticated>
+          <SignInButton mode="modal">
+            <Button
+              color="secondary"
+              className="font-semibold shadow-sm px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
+            >
+              Get NoteSync Free
+            </Button>
+          </SignInButton>
+          <SignInButton mode="modal">
+            <Button
+              variant="light"
+              color="secondary"
+              className="font-semibold flex items-center px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
+            >
+              Request A Demo <MoveRight className="-ml-1" />
+            </Button>
+          </SignInButton>
+        </Unauthenticated>
+
+        <Authenticated>
+          <Button
+            color="secondary"
+            className="font-semibold flex items-center px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
+          >
+            Enter NoteSync <MoveRight className="-ml-1" />
+          </Button>
+        </Authenticated>
       </div>
 
       <div className="flex justify-center">

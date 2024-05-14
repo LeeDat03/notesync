@@ -5,7 +5,6 @@ const LandingLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <main>
       <NavigationMenu />
-      {/* <Test /> */}
       {children}
     </main>
   );

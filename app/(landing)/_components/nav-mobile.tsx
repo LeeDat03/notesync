@@ -1,16 +1,18 @@
-import { dropdownData } from "@/constants";
 import React from "react";
-import DropdownMobile from "./dropdown-mobile";
-import { Button, Spinner } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { Authenticated, Unauthenticated } from "convex/react";
 import { SignInButton, SignOutButton } from "@clerk/clerk-react";
 
+import { dropdownData } from "@/constants";
+import DropdownMobile from "./dropdown-mobile";
+
 const NavMobile = ({
-  isAuthenticated,
-  isLoading,
+  setIsMenuOpen,
 }: {
-  isAuthenticated: boolean;
-  isLoading: boolean;
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const onClick = () => setIsMenuOpen(false);
+
   return (
     <ul className="flex flex-col lg:hidden ">
       {dropdownData.map((item) => (
@@ -18,16 +20,31 @@ const NavMobile = ({
           key={item.title}
           title={item.title}
           items={item.items}
+          onClick={onClick}
         />
       ))}
 
       <div className="mt-6 flex flex-col gap-2 self-stretch">
-        <Button size="sm" color="primary" className="text-sm font-semibold">
-          {isAuthenticated ? "Enter NoteSync" : "Get NoteSync Free"}
-        </Button>
+        <Authenticated>
+          <Button size="sm" color="primary" className="text-sm font-semibold">
+            Enter NoteSync
+          </Button>
 
-        {!isLoading && !isAuthenticated && (
-          <SignInButton mode="modal" signUpForceRedirectUrl="/">
+          <SignOutButton>
+            <Button size="sm" color="danger" className="text-sm font-semibold">
+              Sign out
+            </Button>
+          </SignOutButton>
+        </Authenticated>
+
+        <Unauthenticated>
+          <Button size="sm" color="primary" className="text-sm font-semibold">
+            Get NoteSync Free
+          </Button>
+          <SignInButton
+            mode="modal"
+            forceRedirectUrl={process.env.NEXT_PUBLIC_WEBSITE_URL! || "/"}
+          >
             <Button
               size="sm"
               color="secondary"
@@ -36,15 +53,7 @@ const NavMobile = ({
               Log In
             </Button>
           </SignInButton>
-        )}
-
-        {!isLoading && isAuthenticated && (
-          <SignOutButton>
-            <Button size="sm" color="danger" className="text-sm font-semibold">
-              Sign out
-            </Button>
-          </SignOutButton>
-        )}
+        </Unauthenticated>
       </div>
     </ul>
   );

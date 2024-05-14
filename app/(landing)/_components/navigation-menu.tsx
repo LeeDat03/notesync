@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@nextui-org/react";
 import {
   Navbar,
@@ -9,8 +9,11 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/react";
+
 import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
-import { useConvexAuth } from "convex/react";
+import { AuthLoading, Authenticated, Unauthenticated } from "convex/react";
+
+import { useNavbarScroll } from "@/hooks/use-navbar-scroll";
 
 import Logo from "./logo";
 import NavMobile from "./nav-mobile";
@@ -18,19 +21,7 @@ import NavDesktop from "./nav-desktop";
 
 const NavigationMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  const { isAuthenticated, isLoading } = useConvexAuth();
-
-  // TODO: move to hooks
-  useEffect(() => {
-    const updatePosition = () => {
-      setScrollPosition(window.scrollY);
-    };
-    window.addEventListener("scroll", updatePosition);
-    updatePosition();
-    return () => window.removeEventListener("scroll", updatePosition);
-  }, []);
+  const scrollPosition = useNavbarScroll();
 
   return (
     <Navbar
@@ -38,17 +29,19 @@ const NavigationMenu = () => {
       maxWidth="full"
       classNames={{
         wrapper: `p-2 md:p-4 flex items-center w-full z-[500] bg-white transition-all duration-100 ${
-          scrollPosition > 10 && !isMenuOpen && "border-b-3 border-gray-200"
+          scrollPosition && !isMenuOpen && "border-b-3 border-gray-200"
         }`,
       }}
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
+      {/* LOGO + NAV-DESKTOP */}
       <NavbarContent justify="start">
         <Logo />
         <NavDesktop />
       </NavbarContent>
 
+      {/* BUTTON */}
       <NavbarContent
         className="hidden lg:flex justify-between items-center"
         justify="end"
@@ -66,10 +59,15 @@ const NavigationMenu = () => {
           <div className="self-center h-6 w-[1px] bg-gray-200"></div>
 
           <div className="flex gap-2">
-            {isLoading && <Spinner size="sm" />}
+            <AuthLoading>
+              <Spinner size="sm" />
+            </AuthLoading>
 
-            {!isLoading && !isAuthenticated && (
-              <SignInButton mode="modal">
+            <Unauthenticated>
+              <SignInButton
+                mode="modal"
+                forceRedirectUrl={process.env.NEXT_PUBLIC_WEBSITE_URL! || "/"}
+              >
                 <Button
                   size="sm"
                   variant="light"
@@ -79,10 +77,11 @@ const NavigationMenu = () => {
                   Log In
                 </Button>
               </SignInButton>
-            )}
 
-            {!isLoading && !isAuthenticated && (
-              <SignUpButton mode="modal" signInForceRedirectUrl="/">
+              <SignUpButton
+                mode="modal"
+                forceRedirectUrl={process.env.NEXT_PUBLIC_WEBSITE_URL! || "/"}
+              >
                 <Button
                   size="sm"
                   color="primary"
@@ -91,31 +90,30 @@ const NavigationMenu = () => {
                   Get NoteSync Free
                 </Button>
               </SignUpButton>
-            )}
+            </Unauthenticated>
 
-            {isAuthenticated && (
-              <>
-                <Button
-                  size="sm"
-                  color="primary"
-                  className="text-sm font-semibold"
-                >
-                  Enter NoteSync
-                </Button>
-                <UserButton
-                  signInUrl="/"
-                  appearance={{
-                    elements: {
-                      userButtonAvatarBox: { width: "32px", height: "32px" },
-                    },
-                  }}
-                />
-              </>
-            )}
+            <Authenticated>
+              <Button
+                size="sm"
+                color="primary"
+                className="text-sm font-semibold"
+              >
+                Enter NoteSync
+              </Button>
+              <UserButton
+                signInUrl="/"
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: { width: "32px", height: "32px" },
+                  },
+                }}
+              />
+            </Authenticated>
           </div>
         </div>
       </NavbarContent>
 
+      {/* NAV MOBILE */}
       <NavbarContent className="lg:hidden" justify="end">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -123,7 +121,7 @@ const NavigationMenu = () => {
       </NavbarContent>
 
       <NavbarMenu className="p-2">
-        <NavMobile isAuthenticated={isAuthenticated} isLoading={isLoading} />
+        <NavMobile setIsMenuOpen={setIsMenuOpen} />
       </NavbarMenu>
     </Navbar>
   );

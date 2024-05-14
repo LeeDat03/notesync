@@ -3,15 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import { Button, Spinner } from "@nextui-org/react";
-import { useConvexAuth } from "convex/react";
-import { MoveRight } from "lucide-react";
-
-import { images } from "@/constants";
 import { SignInButton } from "@clerk/clerk-react";
 
-const Hero = () => {
-  const { isAuthenticated, isLoading } = useConvexAuth();
+import { AuthLoading, Authenticated, Unauthenticated } from "convex/react";
 
+import { MoveRight } from "lucide-react";
+import { images } from "@/constants";
+
+const Hero = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center">
@@ -27,37 +26,38 @@ const Hero = () => {
       </div>
 
       <div className="mt-8 mb-6 flex gap-2 lg:gap-4 items-center justify-center">
-        {isLoading && <Spinner size="md" />}
+        <AuthLoading>
+          <Spinner size="md" />
+        </AuthLoading>
 
-        {!isLoading && !isAuthenticated && (
-          <>
-            <SignInButton mode="modal">
-              <Button
-                color="secondary"
-                className="font-semibold shadow-sm px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
-              >
-                Get NoteSync Free
-              </Button>
-            </SignInButton>
-            <SignInButton mode="modal">
-              <Button
-                variant="light"
-                color="secondary"
-                className="font-semibold flex items-center px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
-              >
-                Request A Demo <MoveRight className="-ml-1" />
-              </Button>
-            </SignInButton>
-          </>
-        )}
-        {!isLoading && isAuthenticated && (
+        <Unauthenticated>
+          <SignInButton mode="modal">
+            <Button
+              color="secondary"
+              className="font-semibold shadow-sm px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
+            >
+              Get NoteSync Free
+            </Button>
+          </SignInButton>
+          <SignInButton mode="modal">
+            <Button
+              variant="light"
+              color="secondary"
+              className="font-semibold flex items-center px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
+            >
+              Request A Demo <MoveRight className="-ml-1" />
+            </Button>
+          </SignInButton>
+        </Unauthenticated>
+
+        <Authenticated>
           <Button
             color="secondary"
             className="font-semibold flex items-center px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
           >
             Enter NoteSync <MoveRight className="-ml-1" />
           </Button>
-        )}
+        </Authenticated>
       </div>
 
       <div className="flex justify-center gap-4 md:gap-8">

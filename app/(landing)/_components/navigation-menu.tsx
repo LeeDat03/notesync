@@ -18,10 +18,12 @@ import { useNavbarScroll } from "@/hooks/use-navbar-scroll";
 import Logo from "./logo";
 import NavMobile from "./nav-mobile";
 import NavDesktop from "./nav-desktop";
+import { useRouter } from "next/navigation";
 
 const NavigationMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollPosition = useNavbarScroll();
+  const router = useRouter();
 
   return (
     <Navbar
@@ -64,10 +66,7 @@ const NavigationMenu = () => {
             </AuthLoading>
 
             <Unauthenticated>
-              <SignInButton
-                mode="modal"
-                forceRedirectUrl={process.env.NEXT_PUBLIC_WEBSITE_URL! || "/"}
-              >
+              <SignInButton mode="modal">
                 <Button
                   size="sm"
                   variant="light"
@@ -78,10 +77,7 @@ const NavigationMenu = () => {
                 </Button>
               </SignInButton>
 
-              <SignUpButton
-                mode="modal"
-                forceRedirectUrl={process.env.NEXT_PUBLIC_WEBSITE_URL! || "/"}
-              >
+              <SignUpButton mode="modal">
                 <Button
                   size="sm"
                   color="primary"
@@ -97,6 +93,7 @@ const NavigationMenu = () => {
                 size="sm"
                 color="primary"
                 className="text-sm font-semibold"
+                onClick={() => router.push("/documents")}
               >
                 Enter NoteSync
               </Button>

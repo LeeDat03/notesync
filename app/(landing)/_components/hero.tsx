@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button, Spinner } from "@nextui-org/react";
 import { SignInButton } from "@clerk/clerk-react";
 
@@ -11,6 +12,8 @@ import { MoveRight } from "lucide-react";
 import { images } from "@/constants";
 
 const Hero = () => {
+  const router = useRouter();
+
   return (
     <>
       <div className="flex flex-col items-center justify-center">
@@ -54,6 +57,7 @@ const Hero = () => {
           <Button
             color="secondary"
             className="font-semibold flex items-center px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
+            onClick={() => router.push("/documents")}
           >
             Enter NoteSync <MoveRight className="-ml-1" />
           </Button>

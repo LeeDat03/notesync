@@ -7,8 +7,11 @@ import { MoveRight } from "lucide-react";
 import { images } from "@/constants";
 import { AuthLoading, Authenticated, Unauthenticated } from "convex/react";
 import { SignInButton } from "@clerk/clerk-react";
+import { useRouter } from "next/navigation";
 
 const CtaSection = () => {
+  const router = useRouter();
+
   return (
     <div className="border-b-2 border-gray-200 pb-10">
       <div className="flex flex-col items-center justify-center">
@@ -49,6 +52,7 @@ const CtaSection = () => {
           <Button
             color="secondary"
             className="font-semibold flex items-center px-2 py-1 md:px-4 md:py-2 md:text-sm text-xs"
+            onClick={() => router.push("/documents")}
           >
             Enter NoteSync <MoveRight className="-ml-1" />
           </Button>

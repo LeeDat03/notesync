@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { Authenticated, Unauthenticated } from "convex/react";
-import { SignInButton, SignOutButton } from "@clerk/clerk-react";
+import { SignInButton, SignOutButton, SignUpButton } from "@clerk/clerk-react";
 
 import { dropdownData } from "@/constants";
 import DropdownMobile from "./dropdown-mobile";
@@ -12,6 +15,7 @@ const NavMobile = ({
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const onClick = () => setIsMenuOpen(false);
+  const router = useRouter();
 
   return (
     <ul className="flex flex-col lg:hidden ">
@@ -26,7 +30,12 @@ const NavMobile = ({
 
       <div className="mt-6 flex flex-col gap-2 self-stretch">
         <Authenticated>
-          <Button size="sm" color="primary" className="text-sm font-semibold">
+          <Button
+            size="sm"
+            color="primary"
+            className="text-sm font-semibold"
+            onClick={() => router.push("/documents")}
+          >
             Enter NoteSync
           </Button>
 
@@ -38,13 +47,12 @@ const NavMobile = ({
         </Authenticated>
 
         <Unauthenticated>
-          <Button size="sm" color="primary" className="text-sm font-semibold">
-            Get NoteSync Free
-          </Button>
-          <SignInButton
-            mode="modal"
-            forceRedirectUrl={process.env.NEXT_PUBLIC_WEBSITE_URL! || "/"}
-          >
+          <SignUpButton mode="modal">
+            <Button size="sm" color="primary" className="text-sm font-semibold">
+              Get NoteSync Free
+            </Button>
+          </SignUpButton>
+          <SignInButton mode="modal">
             <Button
               size="sm"
               color="secondary"

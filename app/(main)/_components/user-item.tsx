@@ -18,7 +18,7 @@ const UserItem = () => {
       <DropdownTrigger>
         <div
           role="button"
-          className="flex items-center text-sm p-3 w-full hover:bg-gray-300 transition"
+          className="flex items-center text-sm p-3 w-full hover:bg-gray-200 transition"
         >
           <div className="flex items-center gap-x-2 max-w-[150px]">
             <Avatar isBordered src={user?.imageUrl} className="h-5 w-5" />

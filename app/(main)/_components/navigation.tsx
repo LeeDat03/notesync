@@ -1,11 +1,21 @@
 "use client";
 
 import clsx from "clsx";
-import { ChevronLeft, MenuIcon } from "lucide-react";
+import {
+  ChevronLeft,
+  FileIcon,
+  MenuIcon,
+  Plus,
+  PlusCircleIcon,
+  Search,
+  Settings,
+  Trash,
+} from "lucide-react";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 
 import { useMediaQuery } from "usehooks-ts";
 import UserItem from "./user-item";
+import ItemNav from "./item-nav";
 
 const Navigation = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -117,6 +127,23 @@ const Navigation = () => {
         {/* USER SECTION */}
         <div>
           <UserItem />
+
+          <ItemNav label="Search" icon={Search} isSearch />
+          <ItemNav label="Settings" icon={Settings} />
+          <ItemNav label="New Page" icon={PlusCircleIcon} />
+        </div>
+
+        <div className="my-4">
+          <ItemNav label="Untitled" icon={FileIcon} />
+          <ItemNav label="Untitled" icon={FileIcon} />
+          <ItemNav label="Untitled" icon={FileIcon} />
+          <ItemNav label="Untitled" icon={FileIcon} />
+
+          <ItemNav label="Add a page" icon={Plus} />
+        </div>
+
+        <div>
+          <ItemNav label="Trash" icon={Trash} />
         </div>
 
         {/* RESIZE DIV */}

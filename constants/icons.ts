@@ -13,6 +13,7 @@ import hr from "@/public/assets/icons/hr.png";
 import marketing from "@/public/assets/icons/marketing.png";
 import operations from "@/public/assets/icons/operations.png";
 import product from "@/public/assets/icons/product.png";
+import welcome from "@/public/assets/icons/welcome.png";
 
 const icons = {
   calendar,
@@ -29,6 +30,7 @@ const icons = {
   marketing,
   operations,
   product,
+  welcome,
 };
 
 export default icons;
